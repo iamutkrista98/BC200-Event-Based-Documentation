@@ -148,6 +148,15 @@ codeunit 50100 "Event Subscription Codeunit"
 
     end;
 
+    //from cust. ledger to general journal line
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Apply", 'OnApplyCustomerLedgerEntryOnBeforeModify', '', false, false)]
+    local procedure OnApplyCustomerLedgerEntryOnBeforeModify(CustLedgerEntry: Record "Cust. Ledger Entry"; var GenJnlLine: Record "Gen. Journal Line")
+    begin
+        GenJnlLine.custfield := CustLedgerEntry.custfield + ' From Customer Ledger Entry through OnApplyCust';
+
+    end;
+
 
 
 
